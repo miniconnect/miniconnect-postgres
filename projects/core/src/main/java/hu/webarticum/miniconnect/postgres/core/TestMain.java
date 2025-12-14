@@ -46,7 +46,7 @@ public class TestMain {
 
         InputStream in = socket.getInputStream();
         OutputStream out = socket.getOutputStream();
-        
+
         int len = readI32(in);
         int code = readI32(in);
         if (code == SSL_REQUEST) {
@@ -68,7 +68,7 @@ public class TestMain {
         String database = params.getOrDefault("database", "");
         String app = params.getOrDefault("application_name", "");
         System.out.printf("Startup: user=%s db=%s app=%s%n", user, database, app);
-        
+
         sendAuthenticationOk(out);
 
         sendParameterStatus(out, "server_version", "15.0-miniconnect");
@@ -81,7 +81,7 @@ public class TestMain {
         if (!app.isEmpty()) {
             sendParameterStatus(out, "application_name", app);
         }
-        
+
         Random random = new Random();
         int pid = random.nextInt();
         int secret = random.nextInt();
@@ -99,10 +99,10 @@ public class TestMain {
             if (typeFlag == 'X') {
                 break;
             }
-            
+
             // TODO
             System.out.println("payload: " + ByteString.of(payload));
-            
+
         }
     }
 
@@ -177,7 +177,7 @@ public class TestMain {
         out.write((value >>> 8) & 0xFF);
         out.write(value & 0xFF);
     }
-    
+
     private static byte[] readNBytes(InputStream in, int length) throws IOException {
         byte[] result = new byte[length];
         int pos = 0;
@@ -190,5 +190,5 @@ public class TestMain {
         }
         return result;
     }
-    
+
 }
